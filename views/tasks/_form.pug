@@ -1,0 +1,19 @@
+mixin task_form(action, method, team, err)
+  form.box(action=action, method="post")
+    _csrf
+    _method=method
+
+    - if(err)
+      ul.errors
+        each error in err.errors
+          li= error.message
+
+    div
+      label(for='title') タイトル
+      input#title(name="title", value!=task.title)
+    div
+      label(for='body') 内容
+      textarea#body(name="body", value!=task.body)
+      
+    div.actions
+      input(type="submit")

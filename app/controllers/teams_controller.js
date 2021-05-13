@@ -1,12 +1,6 @@
 const Controller = require('./controller');
 const models = require('../models');
 
-// let index = 1;
-// const teams = [
-//   { id: index++, title: 'テスト1', body: 'テスト1' },
-//   { id: index++, title: 'テスト2', body: 'テスト2' },
-// ];
-
 class TeamsController extends Controller {
   // GET /
   // async index(req, res) {
