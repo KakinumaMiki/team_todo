@@ -32,6 +32,7 @@ class TeamsController extends Controller {
   // GET /:id
   async show(req, res) {
     const team = await this._team(req);
+    // const team = await team.getTask();
     res.render('teams/show', { team });
   }
 
