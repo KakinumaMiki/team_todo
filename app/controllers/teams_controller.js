@@ -32,8 +32,8 @@ class TeamsController extends Controller {
   // GET /:id
   async show(req, res) {
     const team = await this._team(req);
-    // const team = await team.getTask();
-    res.render('teams/show', { team });
+    const tasks = await models.Task.findAll({ include: 'team', where: {teamId: team.id}})
+    res.render('teams/show', { team, tasks });
   }
 
   // GET /:id/edit

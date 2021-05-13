@@ -5,3 +5,11 @@ block content
   a(href=`/teams/${team.id}/tasks/create`) 新規タスクの作成
   br
   a(href=`/teams/${team.id}/edit`) 編集
+
+  h2 タスク一覧
+  each task in tasks
+    p #{task.id}
+    p #{task.title}
+    p #{task.createdAt}
+  //-  
+    タスクID　タイトル　作成日じ　操作
