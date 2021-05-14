@@ -1,0 +1,7 @@
+extends ../layout
+
+include ./_form
+
+block content 
+  h1 チーム編集
+  +team_form(`/teams/${team.id}`, 'put', team, err)

@@ -1,0 +1,7 @@
+extends ../layout
+
+include ./_form
+
+block content 
+  h1 チーム作成
+  +team_form(`/teams`, 'post', team, err)
