@@ -26,13 +26,9 @@ class TeamsController extends Controller {
       name: req.body.name,
       ownerId: req.user.id
     });
-    try {
-      await team.save();
-      await req.flash('info', `新規チーム[${team.name}]を作成しました`);
-      res.redirect(`/teams/${team.id}`);
-    } catch (err) {
-      throw err;
-    }
+    await team.save();
+    await req.flash('info', `新規チーム[${team.name}]を作成しました`);
+    res.redirect(`/teams/${team.id}`);
   }
 
   // GET /:id
@@ -50,14 +46,10 @@ class TeamsController extends Controller {
   // PUT or PATCH /:id
   async update(req, res) {
     const team = await this._team(req);
-    try {
-      team.set(req.body);
-      await team.save();
-      await req.flash('info', `[${team.name}]に更新しました`);
-      res.redirect(`/teams/${team.id}/edit`);
-    } catch (err) {
-      throw err;
-    }
+    team.set(req.body);
+    await team.save();
+    await req.flash('info', `[${team.name}]に更新しました`);
+    res.redirect(`/teams/${team.id}/edit`);
   }
 
   // DELETE /:id
