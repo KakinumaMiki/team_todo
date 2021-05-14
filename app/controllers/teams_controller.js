@@ -10,7 +10,7 @@ class TeamsController extends Controller {
   // }
 
   // GET /create
-  async create(req, res) {
+  async create(_req, res) {
     const team = models.Team.build({});
     res.render('teams/create', { team });
   }

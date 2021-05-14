@@ -2,11 +2,6 @@ const Controller = require('./controller');
 const models = require('../models');
 
 class ExamplesController extends Controller {
-  // GET /
-  async index(req, res) {
-    res.render('examples/index', { examples: examples });
-  }
-
   // GET /create
   async create(req, res) {
     const task = models.Task.build({});
@@ -27,16 +22,9 @@ class ExamplesController extends Controller {
     res.redirect(`/teams/${team.id}`);
   }
 
-  // GET /:id
-  async show(req, res) {
-    const example = examples[req.params.example - 1];
-    res.render('examples/show', { example });
-  }
-
   // GET /:id/edit
   async edit(req, res) {
     const task = await this._task(req);
-    console.log('task.body: ' + task.body);
     res.render('tasks/edit', { task });
   }
 
@@ -49,13 +37,6 @@ class ExamplesController extends Controller {
 
     res.redirect(`/teams/${task.teamId}`);
   }
-
-  // DELETE /:id
-  async destroy(req, res) {
-    await req.flash('info', '削除しました（未実装）');
-    res.redirect('/examples/');
-  }
-
 
   async _team(req) {
     const team = await models.Team.findByPk(req.params.team);
