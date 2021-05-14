@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
         as: 'task'
       });
     }
-  };
+  }
   Team.init({
     name: {
       type: DataTypes.STRING,
