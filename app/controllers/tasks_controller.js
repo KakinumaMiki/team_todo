@@ -1,6 +1,5 @@
 const Controller = require('./controller');
 const models = require('../models');
-const team = require('../models/team');
 
 class ExamplesController extends Controller {
   // GET /
@@ -14,7 +13,7 @@ class ExamplesController extends Controller {
     const team = await this._team(req);
     res.render(`tasks/create`, { task, team });
   }
-  
+
   // POST /
   async store(req, res) {
     const team = await this._team(req);
@@ -23,13 +22,9 @@ class ExamplesController extends Controller {
       title: req.body.title,
       body: req.body.body
     });
-    try {
-      await task.save();
-      await req.flash('info', `タスク[${task.title}]を保存しました`);
-      res.redirect(`/teams/${team.id}`);
-    } catch (err) {
-      throw err;
-    }
+    await task.save();
+    await req.flash('info', `タスク[${task.title}]を保存しました`);
+    res.redirect(`/teams/${team.id}`);
   }
 
   // GET /:id
@@ -41,14 +36,18 @@ class ExamplesController extends Controller {
   // GET /:id/edit
   async edit(req, res) {
     const task = await this._task(req);
+    console.log('task.body: ' + task.body);
     res.render('tasks/edit', { task });
   }
 
   // PUT or PATCH /:id
   async update(req, res) {
-    examples[req.params.example - 1] = { ...examples[req.params.example - 1], ...req.body };
-    await req.flash('info', '更新しました');
-    res.redirect(`/examples/${req.params.example}`);
+    const task = await this._task(req);
+    task.set(req.body);
+    await task.save();
+    await req.flash('info', `[${task.title}]を更新しました`);
+
+    res.redirect(`/teams/${task.teamId}`);
   }
 
   // DELETE /:id

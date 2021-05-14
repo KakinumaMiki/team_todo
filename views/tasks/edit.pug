@@ -4,4 +4,4 @@ include ./_form
 
 block content 
   h1 タスクの編集
-  +team_form(`/teams/${team.id}`, 'put', task, err)
+  +task_form(`/teams/${task.teamId}/tasks/${task.id}`, 'put', task, err)

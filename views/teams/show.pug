@@ -7,9 +7,22 @@ block content
   a(href=`/teams/${team.id}/edit`) 編集
 
   h2 タスク一覧
-  each task in tasks
-    p #{task.id}
-    p #{task.title}
-    p #{task.createdAt}
-  //-  
-    タスクID　タイトル　作成日じ　操作
+  - var hasTasks = tasks.length > 0
+  if hasTasks
+    table(border=1)
+      thead
+        tr
+          th タスクID
+          th タイトル
+          th 作成日時
+          th 操作
+      tbody
+        each task in tasks
+          tr
+            td #{task.id}
+            td #{task.title}
+            td #{task.formattedCreatedAt}
+            td
+              a(href=`/teams/${team.id}/tasks/${task.id}/edit`) 編集
+  else
+    p タスクはありません

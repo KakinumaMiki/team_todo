@@ -1,3 +1,4 @@
+const moment = require('moment-timezone');
 const Controller = require('./controller');
 const models = require('../models');
 
@@ -28,7 +29,14 @@ class TeamsController extends Controller {
   // GET /:id
   async show(req, res) {
     const team = await this._team(req);
-    const tasks = await models.Task.findAll({ include: 'team', where: {teamId: team.id}})
+    const tasks = await models.Task.findAll({
+      include: 'team', 
+      where: { teamId: team.id },
+      order: [['id', 'DESC']]
+    });
+    tasks.forEach((task) => {
+      task.formattedCreatedAt = moment(task.formattedCreatedAt).tz('Asia/Tokyo').format('YYYY/MM/DD HH:mm');
+    });
     res.render('teams/show', { team, tasks });
   }
 
