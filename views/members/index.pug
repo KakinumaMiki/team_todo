@@ -14,3 +14,17 @@ block content
         button(type="submit") 追加
 
   h2 メンバー一覧
+  - var hasMembers = members.length > 0
+  if hasMembers
+    table(border=1)
+      thead
+        tr
+          th 役割
+          th 名前
+      tbody
+        each member in members
+          tr
+            td #{member.role}
+            td #{member.user.displayName}
+  else
+    p メンバーがいません

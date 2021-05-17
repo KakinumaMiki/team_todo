@@ -19,7 +19,8 @@ module.exports = {
         references: { model: 'Users', key: 'id' }
       },
       role: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        defaultValue: 0
       },
       createdAt: {
         allowNull: false,

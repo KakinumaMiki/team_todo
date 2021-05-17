@@ -5,17 +5,13 @@ class ExamplesController extends Controller {
 
   // GET /
   async index(req, res) {
-    const member = models.Member.build({});
     const users = await models.User.findAll();
     const team = await this._team(req);
-    res.render('members/index', { member, users, team });
-  }
-
-  // GET /create
-  async create(req, res) {
-    const member = models.Member.build({});
-    const team = await this._team(req);
-    res.render(`members/create`, { member, team });
+    const members = await models.Member.findAll({
+      include: 'user',
+      where: { teamId: team.id }
+    });
+    res.render('members/index', { members, users, team });
   }
 
   // POST /
@@ -30,42 +26,6 @@ class ExamplesController extends Controller {
     await req.flash('info', `メンバー[${user.displayName}]を追加しました`);
     res.redirect(`/teams/${team.id}/members`);
   }
-
-  // GET /:id
-  async show(req, res) {
-    const team = await this._team(req);
-    const tasks = await models.Task.findAll({
-      include: 'team',
-      where: { teamId: team.id },
-      order: [['id', 'DESC']]
-    });
-    res.render('members/show', { team, tasks });
-  }
-
-
-  // GET /:id/edit
-  async edit(req, res) {
-    const task = await this._task(req);
-    res.render('tasks/edit', { task });
-  }
-
-  // PUT or PATCH /:id
-  async update(req, res) {
-    const task = await this._task(req);
-    task.set(req.body);
-    await task.save();
-    await req.flash('info', `[${task.title}]を更新しました`);
-
-    res.redirect(`/teams/${task.teamId}`);
-  }
-
-
-  // DELETE /:id
-  async destroy(req, res) {
-    await req.flash('info', '削除しました（未実装）');
-    res.redirect('/teams/');
-  }
-
 
   async _team(req) {
     const team = await models.Team.findByPk(req.params.team);
