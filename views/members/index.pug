@@ -8,9 +8,9 @@ block content
 
       div
         label(for='role')
-        select#role(name="user")
+        select#role(name="displayName")
           each user in users
-            option(value!=user) #{user.displayName}
+            option(value!=displayName) #{user.displayName}
         button(type="submit") 追加
 
   h2 メンバー一覧

@@ -20,19 +20,14 @@ class ExamplesController extends Controller {
 
   // POST /
   async store(req, res) {
-    console.log("ここみたいreq.body.user: " + req.body.user);
-    console.log("ここみたいmember: " + req.params.team);
-
-    const user = await models.User.findOne({ where: { id: 1 } });
-    console.log("ここも確認 : " + user);
-
+    const user = await this._user(req);
     const team = await this._team(req);
     const member = models.Member.build({
       teamId: team.id,
-      userId: req.body.role
+      userId: user.id
     });
     await member.save();
-    await req.flash('info', `メンバー[]を追加しました`);
+    await req.flash('info', `メンバー[${user.displayName}]を追加しました`);
     res.redirect(`/teams/${team.id}/members`);
   }
 
@@ -80,9 +75,13 @@ class ExamplesController extends Controller {
     return team;
   }
 
-  // async _user(req) {
-  //   const user = await models.User.findOne({ where : { displayName: req.params.displayName } });
-  // }
+  async _user(req) {
+    const user = await models.User.findOne({ where : { displayName: req.body.displayName } });
+    if (!user) {
+      throw new Error('User not find');
+    }
+    return user;
+  }
 
 }
 
