@@ -9,6 +9,12 @@
 				"0": "Normal",
 				"1": "Admin"
 			}
+		},
+		"Member": {
+			"roles": {
+				"0": "Normal",
+				"1": "Admin"
+			}
 		}
 	}
 }

@@ -22,6 +22,7 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
+  Member.roles = { normal: 0, admin: 1 };
   Member.init({
     teamId: {
       type: DataTypes.INTEGER,

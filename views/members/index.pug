@@ -24,7 +24,7 @@ block content
       tbody
         each member in members
           tr
-            td #{member.role}
-            td #{member.user.displayName}
+            td= __(`models.Member.roles.${member.role}`)
+            td= member.user.displayName
   else
     p メンバーがいません
