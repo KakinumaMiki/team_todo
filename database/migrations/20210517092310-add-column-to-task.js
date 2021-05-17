@@ -4,10 +4,12 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     await queryInterface.addColumn('Tasks', 'creatorId', {
       allowNull: false,
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
+      references: { model: 'Users', key: 'id' }
     }),
     await queryInterface.addColumn('Tasks', 'assigneeId', {
-      type: Sequelize.INTEGER
+      type: Sequelize.INTEGER,
+      references: { model: 'Users', key: 'id' }
     });
   },
   down: async (queryInterface, _Sequelize) => {

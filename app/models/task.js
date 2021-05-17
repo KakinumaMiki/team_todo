@@ -15,6 +15,16 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'teamId',
         as: 'team'
       });
+
+      this.Creator = this.belongsTo(models.User, {
+        foreignKey: 'creatorId',
+        as: 'creator'
+      });
+
+      this.Assignee = this.belongsTo(models.User, {
+        foreignKey: 'assigneeId',
+        as: 'assignee'
+      });
     }
   }
   Task.init({
@@ -29,6 +39,13 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     status: {
+      type: DataTypes.INTEGER
+    },
+    creatorId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    assigneeId: {
       type: DataTypes.INTEGER
     }
   }, {
