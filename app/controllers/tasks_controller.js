@@ -15,7 +15,8 @@ class ExamplesController extends Controller {
     const task = models.Task.build({
       teamId: team.id,
       title: req.body.title,
-      body: req.body.body
+      body: req.body.body,
+      creatorId: req.user.id
     });
     await task.save();
     await req.flash('info', `タスク[${task.title}]を保存しました`);
