@@ -1,12 +1,6 @@
 const Controller = require('./controller');
 const models = require('../models');
 
-// let index = 1;
-// const teams = [
-//   { id: index++, title: 'テスト1', body: 'テスト1' },
-//   { id: index++, title: 'テスト2', body: 'テスト2' },
-// ];
-
 class TeamsController extends Controller {
   // GET /
   // async index(req, res) {
@@ -15,7 +9,7 @@ class TeamsController extends Controller {
   // }
 
   // GET /create
-  async create(req, res) {
+  async create(_req, res) {
     const team = models.Team.build({});
     res.render('teams/create', { team });
   }
@@ -34,7 +28,8 @@ class TeamsController extends Controller {
   // GET /:id
   async show(req, res) {
     const team = await this._team(req);
-    res.render('teams/show', { team });
+    const tasks = await team.getTasks( { order: [['id', 'DESC']] });
+    res.render('teams/show', { team, tasks });
   }
 
   // GET /:id/edit

@@ -1,0 +1,7 @@
+extends ../layout
+
+include ./_form
+
+block content 
+  h1 タスクの編集
+  +task_form(`/teams/${task.teamId}/tasks/${task.id}`, 'put', task, err)
