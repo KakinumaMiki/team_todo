@@ -17,9 +17,14 @@ mixin task_form(action, method, task, memberUsers, err)
     
     div
       lavel(for='assigneeId') 担当者
-      select#assigneeId(name="assigneeId")
-        each memberUser in memberUsers
-          option(value!=assigneeId) #{memberUser.displayName}
+      - var hasMemberUsers = memberUsers.length > 0
+      if hasMemberUsers
+        select#assigneeId(name="displayName")
+          each memberUser in memberUsers
+            option(value!=displayName) #{memberUser.displayName}
+      else
+        select#assigneeId(name="assigneeId")
+          option(value!=assigneeId) なし      
       
     div.actions
       input(type="submit")
