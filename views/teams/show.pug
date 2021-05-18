@@ -19,9 +19,9 @@ block content
       tbody
         each task in tasks
           tr
-            td #{task.id}
-            td #{task.title}
-            td #{task.formattedCreatedAt}
+            td= task.id
+            td= task.title
+            td= helpers.formatDateTime(task.createdAt)
             td
               a(href=`/teams/${team.id}/tasks/${task.id}/edit`) 編集
   else
