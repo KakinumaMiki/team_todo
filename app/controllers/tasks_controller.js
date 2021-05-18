@@ -6,7 +6,8 @@ class ExamplesController extends Controller {
   async create(req, res) {
     const task = models.Task.build({});
     const team = await this._team(req);
-    res.render(`tasks/create`, { task, team });
+    const memberUsers = await team.getMemberUsers();
+    res.render(`tasks/create`, { task, team, memberUsers });
   }
 
   // POST /

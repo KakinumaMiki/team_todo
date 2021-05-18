@@ -1,4 +1,4 @@
-mixin task_form(action, method, team, err)
+mixin task_form(action, method, task, memberUsers, err)
   form.box(action=action, method="post")
     _csrf
     _method=method
@@ -14,6 +14,12 @@ mixin task_form(action, method, team, err)
     div
       label(for='body') 内容
       textarea#body(name="body") #{task.body}
+    
+    div
+      lavel(for='assigneeId') 担当者
+      select#assigneeId(name="assigneeId")
+        each memberUser in memberUsers
+          option(value!=assigneeId) #{memberUser.displayName}
       
     div.actions
       input(type="submit")
