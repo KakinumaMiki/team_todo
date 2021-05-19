@@ -28,7 +28,10 @@ class TeamsController extends Controller {
   // GET /:id
   async show(req, res) {
     const team = await this._team(req);
-    const tasks = await team.getTasks( { order: [['id', 'DESC']] });
+    const tasks = await team.getTasks({ 
+      include: ['assignee'],
+      order: [['id', 'DESC']]
+    });
     res.render('teams/show', { team, tasks });
   }
 

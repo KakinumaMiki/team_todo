@@ -24,7 +24,10 @@ block content
           tr
             td= task.id
             td= task.title
-            td= task.assigneeId
+            if task.assignee
+              td= task.assignee.displayName
+            else
+              td なし
             td= helpers.formatDateTime(task.createdAt)
             td
               a(href=`/teams/${team.id}/tasks/${task.id}/edit`) 編集
