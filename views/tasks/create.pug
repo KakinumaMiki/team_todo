@@ -1,7 +1,0 @@
-extends ../layout
-
-include ./_form
-
-block content 
-  h1 タスクの新規作成
-  +task_form(`/teams/${team.id}/tasks`, 'post', task, memberUsers, err)
