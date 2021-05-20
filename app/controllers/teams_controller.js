@@ -15,6 +15,12 @@ class TeamsController extends Controller {
       ownerId: req.user.id
     });
     await team.save();
+    const member = models.Member.build({
+      teamId: team.id,
+      userId: req.user.id,
+      role: 1
+    });
+    await member.save();
     await req.flash('info', `新規チーム[${team.name}]を作成しました`);
     res.redirect(`/manager/teams/${team.id}`);
   }
