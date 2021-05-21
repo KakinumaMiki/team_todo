@@ -5,7 +5,7 @@ class TopController extends Controller {
   // GET /
   async index(req, res) {
     const user = req.user;
-    if(req.isAuthenticated()) {
+    if (req.isAuthenticated()) {
       const members = await models.Member.findAll({
         include: ['team'],
         order: [['teamId', 'ASC']],
@@ -17,10 +17,9 @@ class TopController extends Controller {
         order: [['teamId', 'ASC']],
         where: { assigneeId: user.id }
       });
-      res.render('index', { title: 'Express', user, members, tasks });
-    } else {
-      res.render('index', { title: 'Express', user });
+      return res.render('index', { title: 'Express', user, members, tasks });
     }
+     return res.render('index', { title: 'Express', user });
   }
 
 }
