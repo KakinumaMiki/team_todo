@@ -44,7 +44,7 @@ block content
             tr
               td= member.team.id
               td= member.team.name
-              td= member.role
+              td= __(`models.Member.taemRoles.${member.role}`)
               td= helpers.formatDateTime(member.team.createdAt)
               td
                 a(href=`/manager/teams/${member.team.id}`) 管理
