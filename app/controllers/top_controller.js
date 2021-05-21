@@ -8,7 +8,7 @@ class TopController extends Controller {
     const user = req.user;
 
     if(user) {
-      const members = await user.getMembers({ 
+      const members = await user.getMembers({
         include: ['team'],
         order: [['teamId', 'ASC']]
       });
