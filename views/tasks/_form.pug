@@ -14,13 +14,10 @@ mixin task_form(action, method, task, memberUsers, err)
     div
       label(for='body') 内容
       textarea#body(name="body") #{task.body}
-    
     div
       lavel(for='assigneeId') 担当者
       select#assigneeId(name="id")
         each memberUser in memberUsers
           option(value!=memberUser.id) #{memberUser.displayName}
-    
-      
     div.actions
       input(type="submit")
