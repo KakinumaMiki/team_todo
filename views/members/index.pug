@@ -1,0 +1,30 @@
+extends ../layout
+
+block content 
+  h2 新メンバー追加
+    form(action=`/teams/${team.id}/members`, method="post")
+      _csrf
+      _method='post'
+
+      div
+        label(for='role')
+        select#role(name="displayName")
+          each user in users
+            option(value!=displayName) #{user.displayName}
+        button(type="submit") 追加
+
+  h2 メンバー一覧
+  - var hasMembers = members.length > 0
+  if hasMembers
+    table(border=1)
+      thead
+        tr
+          th 役割
+          th 名前
+      tbody
+        each member in members
+          tr
+            td= __(`models.Member.roles.${member.role}`)
+            td= member.user.displayName
+  else
+    p メンバーがいません
