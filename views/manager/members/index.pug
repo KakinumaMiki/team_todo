@@ -1,8 +1,8 @@
-extends ../layout
+extends ../../layout
 
 block content 
   h2 新メンバー追加
-    form(action=`/teams/${team.id}/members`, method="post")
+    form(action=`/manager/teams/${team.id}/members`, method="post")
       _csrf
       _method='post'
 

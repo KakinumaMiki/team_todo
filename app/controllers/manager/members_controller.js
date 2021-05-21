@@ -1,5 +1,5 @@
-const Controller = require('./controller');
-const models = require('../models');
+const Controller = require('../controller');
+const models = require('../../models');
 
 class ExamplesController extends Controller {
 
@@ -11,7 +11,7 @@ class ExamplesController extends Controller {
       include: 'user',
       where: { teamId: team.id }
     });
-    res.render('members/index', { members, users, team });
+    res.render('manager/members/index', { members, users, team });
   }
 
   // POST /
@@ -24,7 +24,7 @@ class ExamplesController extends Controller {
     });
     await member.save();
     await req.flash('info', `メンバー[${user.displayName}]を追加しました`);
-    res.redirect(`/teams/${team.id}/members`);
+    res.redirect(`/manager/teams/${team.id}/members`);
   }
 
   async _team(req) {
@@ -44,7 +44,5 @@ class ExamplesController extends Controller {
   }
 
 }
-
-
 
 module.exports = ExamplesController;
