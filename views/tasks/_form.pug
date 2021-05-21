@@ -16,7 +16,7 @@ mixin task_form(action, method, task, memberUsers, err)
       textarea#body(name="body") #{task.body}
     div
       lavel(for='assigneeId') 担当者
-      select#assigneeId(name="id")
+      select#assigneeId(name="assigneeId")
         each memberUser in memberUsers
           option(value!=memberUser.id) #{memberUser.displayName}
     div.actions

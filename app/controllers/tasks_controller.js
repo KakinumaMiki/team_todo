@@ -13,23 +13,13 @@ class ExamplesController extends Controller {
   // POST /
   async store(req, res) {
     const team = await this._team(req);
-    let task = "";
-    if (req.body.id){
-      task = models.Task.build({
-        teamId: team.id,
-        title: req.body.title,
-        body: req.body.body,
-        creatorId: req.user.id,
-        assigneeId: req.body.id
-      });
-    } else {
-      task = models.Task.build({
-        teamId: team.id,
-        title: req.body.title,
-        body: req.body.body,
-        creatorId: req.user.id
-      });
-    }
+    const task = models.Task.build({
+      teamId: team.id,
+      title: req.body.title,
+      body: req.body.body,
+      creatorId: req.user.id,
+      assigneeId: req.body.assigneeId
+    });
 
     await task.save();
     await req.flash('info', `タスク[${task.title}]を保存しました`);
@@ -47,23 +37,15 @@ class ExamplesController extends Controller {
   // PUT or PATCH /:id
   async update(req, res) {
     const team = await this._team(req);
-    let task = await this._task(req);
-    if (req.body.id){
-      task.set({
-        teamId: team.id,
-        title: req.body.title,
-        body: req.body.body,
-        creatorId: req.user.id,
-        assigneeId: req.body.id
-      });
-    } else {
-      task.set({
-        teamId: team.id,
-        title: req.body.title,
-        body: req.body.body,
-        creatorId: req.user.id
-      });
-    }
+    const task = await this._task(req);
+    task.set({
+      teamId: team.id,
+      title: req.body.title,
+      body: req.body.body,
+      creatorId: req.user.id,
+      assigneeId: req.body.assigneeId
+    });
+
     await task.save();
     await req.flash('info', `[${task.title}]を更新しました`);
     res.redirect(`/teams/${task.teamId}`);
