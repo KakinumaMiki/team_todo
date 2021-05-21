@@ -17,9 +17,9 @@ class TopController extends Controller {
         order: [['teamId', 'ASC']],
         where: { assigneeId: user.id }
       });
-      return res.render('index', { title: 'Express', user, members, tasks });
+      return res.render('index', { title: 'Express', user, tasks, members });
     }
-     return res.render('index', { title: 'Express', user });
+    return res.render('index', { title: 'Express', user });
   }
 
 }
