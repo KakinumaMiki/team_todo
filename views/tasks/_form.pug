@@ -18,6 +18,6 @@ mixin task_form(action, method, task, memberUsers, err)
       lavel(for='assigneeId') 担当者
       select#assigneeId(name="assigneeId")
         each memberUser in memberUsers
-          option(value!=memberUser.id) #{memberUser.displayName}
+          option(value!=memberUser.id, selected=(task.assigneeId === memberUser.id)) #{memberUser.displayName}
     div.actions
       input(type="submit")
