@@ -17,8 +17,10 @@ class TopController extends Controller {
         order: [['teamId', 'ASC']],
         where: { assigneeId: user.id }
       });
+      console.log('membersの中身: ' + JSON.stringify(members));
       return res.render('index', { title: 'Express', user, tasks, members });
     }
+    console.log('ログインしていない場合');
     return res.render('index', { title: 'Express', user });
   }
 
