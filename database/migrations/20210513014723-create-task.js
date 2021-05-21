@@ -14,6 +14,7 @@ module.exports = {
         references: { model: 'Teams', key: 'id' }
       },
       title: {
+        allowNull: false,
         type: Sequelize.STRING
       },
       body: {
