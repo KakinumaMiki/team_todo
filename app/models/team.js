@@ -21,9 +21,16 @@ module.exports = (sequelize, DataTypes) => {
         as: 'tasks'
       });
 
-      this.Member = this.hasMany(models.Member, {
+      this.Members = this.hasMany(models.Member, {
         foreignKey: 'teamId',
-        as: 'member'
+        as: 'members'
+      });
+
+      this.MemberUsers = this.belongsToMany(models.User, {
+        through: 'Member',
+        foreignKey: 'teamId',
+        otherKey: 'userId',
+        as: 'memberUsers'
       });
     }
   }

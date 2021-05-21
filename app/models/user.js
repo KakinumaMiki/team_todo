@@ -16,9 +16,9 @@ module.exports = (sequelize, DataTypes) => {
         as: 'ownTeams'
       });
 
-      this.Member = this.hasMany(models.Member, {
+      this.Members = this.hasMany(models.Member, {
         foreignKey: 'userId',
-        as: 'member'
+        as: 'members'
       });
     }
 

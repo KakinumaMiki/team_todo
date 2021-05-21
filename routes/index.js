@@ -15,7 +15,7 @@ route.put('/user', forceLogin, 'users_controller@update');
 
 // resource style
 route.resource('examples', 'examples_controller');
-route.resource('teams', { controller: 'teams_controller', only: ['create', 'store', 'show', 'edit', 'update'] });
+route.resource('teams', forceLogin, { controller: 'teams_controller', only: ['create', 'store', 'show', 'edit', 'update'] });
 
 const teamRoute = route.sub('/teams/:team');
 teamRoute.resource('/tasks', { controller: 'tasks_controller', only: ['create', 'store', 'edit', 'update'] });
