@@ -1,28 +1,29 @@
 const Controller = require('./controller');
 const models = require('../models');
 
-class UsersController extends Controller {
+class TopController extends Controller {
 
   // GET /
   async index(req, res) {
     const user = req.user;
-    console.log('確認(user): ' + JSON.stringify(user));
 
     if(user) {
-      const members = await user.getMembers({ include: ['team'] });
-      console.log('確認(members): ' + JSON.stringify(members));
+      const members = await user.getMembers({ 
+        include: ['team'],
+        order: [['teamId', 'ASC']]
+      });
 
       const tasks = await models.Task.findAll({
-        include: ['assignee'],
+        include: ['assignee', 'team'],
+        order: [['teamId', 'ASC']],
         where: { assigneeId: user.id }
       });
-      console.log('確認(tasks): ' + JSON.stringify(tasks));
       res.render('index', { title: 'Express', user, members, tasks });
     } else {
-      res.render('index', { title: 'Express', user: req.user });
+      res.render('index', { title: 'Express', user });
     }
   }
 
 }
 
-module.exports = UsersController;
+module.exports = TopController;

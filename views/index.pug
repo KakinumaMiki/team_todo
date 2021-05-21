@@ -18,13 +18,13 @@ block content
         tbody
           each task in tasks
             tr
-              td= task.teamId
+              td= task.team.name
               td= task.id
               td= task.title
               td= task.assignee.displayName
               td= helpers.formatDateTime(task.createdAt)
               td
-                a(href=`/`) 詳細
+                a(href=`/tasks/${task.id}`) 詳細
     else
       p タスクはありません
     h2 所属しているチーム
@@ -47,7 +47,8 @@ block content
               td= __(`models.Member.taemRoles.${member.role}`)
               td= helpers.formatDateTime(member.team.createdAt)
               td
-                a(href=`/manager/teams/${member.team.id}`) 管理
+                if member.role === 1
+                  a(href=`/manager/teams/${member.team.id}`) 管理
     else
       p 所属しているチームはありません
   else

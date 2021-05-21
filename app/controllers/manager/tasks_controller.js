@@ -1,7 +1,7 @@
 const Controller = require('../controller');
 const models = require('../../models');
 
-class ExamplesController extends Controller {
+class TasksController extends Controller {
   // GET /create
   async create(req, res) {
     const task = models.Task.build({});
@@ -100,4 +100,4 @@ class ExamplesController extends Controller {
   }
 }
 
-module.exports = ExamplesController;
+module.exports = TasksController;
