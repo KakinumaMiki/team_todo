@@ -2,15 +2,14 @@ const Controller = require('./controller');
 const models = require('../models');
 
 class TopController extends Controller {
-
   // GET /
   async index(req, res) {
     const user = req.user;
-
-    if(user) {
-      const members = await user.getMembers({
+    if(req.isAuthenticated()) {
+      const members = await models.Member.findAll({
         include: ['team'],
-        order: [['teamId', 'ASC']]
+        order: [['teamId', 'ASC']],
+        where: { userId: user.id }
       });
 
       const tasks = await models.Task.findAll({
