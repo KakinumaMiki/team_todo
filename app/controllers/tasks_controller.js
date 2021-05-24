@@ -8,6 +8,7 @@ class TasksController extends Controller {
     const task = await this._task(req);
     const team = await task.getTeam();
     const comments = await task.getComment({
+      include: ['creatorComment'],
       order: [['id', 'ASC']]
     });
     res.render('tasks/show', { task, team, comments });

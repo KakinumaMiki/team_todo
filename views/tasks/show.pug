@@ -10,8 +10,8 @@ block content
   h3 コメント
   ul
     each comment in comments
-      li= comment.message
-      li(type="none")= helpers.formatDateTime(comment.createdAt)
+      li #{comment.message}
+      li(type="none") #{helpers.formatDateTime(comment.createdAt)} #{comment.creatorComment.displayName}
 
   form(action=`/tasks/${task.id}/comments`, method="POST")
     _csrf
