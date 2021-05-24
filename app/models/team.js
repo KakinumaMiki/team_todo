@@ -47,6 +47,20 @@ module.exports = (sequelize, DataTypes) => {
       });
       return team;
     }
+
+    async isManager(user) {
+      const members = await this.getMembers({
+        where: {
+          role: 1,
+          userId: user.id
+        }
+      });
+      if (members.length > 0){
+        return true;
+      } else {
+        return false;
+      }
+    }
   }
   Team.init({
     name: {
