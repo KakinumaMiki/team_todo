@@ -1,7 +1,7 @@
 const Controller = require('../controller');
 const models = require('../../models');
 
-class ExamplesController extends Controller {
+class MembersController extends Controller {
 
   // GET /
   async index(req, res) {
@@ -45,4 +45,4 @@ class ExamplesController extends Controller {
 
 }
 
-module.exports = ExamplesController;
+module.exports = MembersController;

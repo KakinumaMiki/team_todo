@@ -5,12 +5,11 @@ const managableTeam = require('../app/middlewares/managable_team');
 
 const route = new Route();
 
-// function style
-route.get('/', function (req, res, _next) {
-  res.render('index', { title: 'Express', user: req.user });
-});
 
 // single style
+route.get('/', 'top_controller@index');
+route.get('/tasks/:task', 'tasks_controller@show');
+
 route.get('/user/edit', forceLogin, 'users_controller@edit');
 route.put('/user', forceLogin, 'users_controller@update');
 
