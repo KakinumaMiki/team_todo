@@ -65,7 +65,12 @@ module.exports = (sequelize, DataTypes) => {
   Team.init({
     name: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      validate: {
+        notEmpty: {
+          msg: 'チーム名は必須です'
+        }
+      }
     },
     ownerId: {
       type: DataTypes.INTEGER
