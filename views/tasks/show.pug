@@ -21,4 +21,11 @@ block content
       label(for='message') メッセージ
       br
       textarea#message(name="message", cols="50", rows="5")
+    div.actions
+      if (task.status === 0)
+        label(for="finished") 完了報告
+        input(type="checkbox", name="finished")
+      else
+        p 既に完了済みです
+    div.actions
       button(type="submit") 送信

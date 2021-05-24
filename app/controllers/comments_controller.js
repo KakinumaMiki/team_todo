@@ -6,6 +6,10 @@ class CommentsController extends Controller {
   async store(req, res) {
     const user = await this._user(req);
     const task = await this._task(req);
+    if (req.body.finished) { 
+      task.set({ status: 1 }); 
+      await task.save();
+    }
     const comment = models.Comment.build({
       taskId: task.id,
       creatorId: user.id,
