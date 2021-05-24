@@ -7,7 +7,10 @@ class TasksController extends Controller {
   async show(req, res) {
     const task = await this._task(req);
     const team = await task.getTeam();
-    res.render('tasks/show', { task, team });
+    const comments = await task.getComment({
+      order: [['id', 'ASC']]
+    });
+    res.render('tasks/show', { task, team, comments });
   }
 
   async _task(req) {

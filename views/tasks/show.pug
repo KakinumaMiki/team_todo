@@ -6,3 +6,19 @@ block content
 
   h2 内容
   p #{task.body}
+
+  h3 コメント
+  ul
+    each comment in comments
+      li= comment.message
+      li(type="none")= helpers.formatDateTime(comment.createdAt)
+
+  form(action=`/tasks/${task.id}/comments`, method="POST")
+    _csrf
+    _method='post'
+
+    div
+      label(for='message') メッセージ
+      br
+      textarea#message(name="message", cols="50", rows="5")
+      button(type="submit") 送信
