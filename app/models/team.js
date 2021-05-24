@@ -55,11 +55,7 @@ module.exports = (sequelize, DataTypes) => {
           userId: user.id
         }
       });
-      if (members.length > 0){
-        return true;
-      } else {
-        return false;
-      }
+      return members.length > 0;
     }
   }
   Team.init({
