@@ -12,8 +12,8 @@
 		},
 		"Member": {
 			"roles": {
-				"0": "Normal",
-				"1": "Admin"
+				"0": "Member",
+				"1": "Manager"
 			}
 		}
 	}
