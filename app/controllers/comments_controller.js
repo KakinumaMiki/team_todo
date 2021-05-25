@@ -6,20 +6,19 @@ class CommentsController extends Controller {
   async store(req, res) {
     const user = await this._user(req);
     const task = await this._task(req);
-    let kind = 0;
     if (req.body.finished) { 
-      kind = 1;
-      task.set({ status: 1 }); 
-      await task.save();
+      await task.finish(user, task, req.body.message);
+      await req.flash('info', '完了報告しました');
+    } else {
+      const comment = models.Comment.build({
+        taskId: task.id,
+        creatorId: user.id,
+        message: req.body.message,
+        kind: 0
+      });
+      await comment.save();
+      await req.flash('info', `${req.body.message}を送信しました`);
     }
-    const comment = models.Comment.build({
-      taskId: task.id,
-      creatorId: user.id,
-      message: req.body.message,
-      kind: kind
-    });
-    await comment.save();
-    await req.flash('info', `${req.body.message}を送信しました`);
     res.redirect(`/tasks/${task.id}`);
   }
 
