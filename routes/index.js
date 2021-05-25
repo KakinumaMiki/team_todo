@@ -8,13 +8,15 @@ const route = new Route();
 
 // single style
 route.get('/', 'top_controller@index');
-route.get('/tasks/:task', 'tasks_controller@show');
+route.get('/tasks/:task', forceLogin, 'tasks_controller@show');
 
 route.get('/user/edit', forceLogin, 'users_controller@edit');
 route.put('/user', forceLogin, 'users_controller@update');
 
 route.get('/teams/create', forceLogin, 'teams_controller@create');
 route.post('/teams', forceLogin, 'teams_controller@store');
+
+route.post('/tasks/:task/comments', forceLogin, 'comments_controller@store');
 
 // resource style
 route.resource('examples', 'examples_controller');

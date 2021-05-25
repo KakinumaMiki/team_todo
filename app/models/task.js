@@ -25,7 +25,24 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: 'assigneeId',
         as: 'assignee'
       });
+
+      this.Comment = this.hasMany(models.Comment, {
+        foreignKey: 'taskId',
+        as: 'comment'
+      });
     }
+
+    async finish(user, task, message) {
+      task.set({ status: 1 });
+      await task.save();
+      await task.createComment({
+        taskId: task.id,
+        creatorId: user.id,
+        message: message,
+        kind: 1
+      });
+    }
+
   }
   Task.init({
     teamId: {

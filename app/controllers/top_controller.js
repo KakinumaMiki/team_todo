@@ -4,6 +4,7 @@ const models = require('../models');
 class TopController extends Controller {
   // GET /
   async index(req, res) {
+    req.setLocale(req.query.lang || 'ja');
     const user = req.user;
     if (req.isAuthenticated()) {
       const members = await models.Member.findAll({

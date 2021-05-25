@@ -6,3 +6,26 @@ block content
 
   h2 内容
   p #{task.body}
+
+  h3 コメント
+  ul
+    each comment in comments
+      li #{comment.message}
+      li(type="none") #{helpers.formatDateTime(comment.createdAt)} #{comment.creatorComment.displayName}
+
+  form(action=`/tasks/${task.id}/comments`, method="POST")
+    _csrf
+    _method='post'
+
+    div
+      label(for='message') メッセージ
+      br
+      textarea#message(name="message", cols="50", rows="5")
+    div.actions
+      if (task.status === 0)
+        label(for="finished") 完了報告
+        input(type="checkbox", name="finished")
+      else
+        p 既に完了済みです
+    div.actions
+      button(type="submit") 送信
